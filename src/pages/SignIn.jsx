@@ -1,3 +1,4 @@
+import { stringify } from "postcss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,8 +10,6 @@ const SignIn = () => {
 
   const navigate = useNavigate();
   
-  console.log(email);
-  console.log(password);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,13 +21,11 @@ const SignIn = () => {
           address: 'Barishal',
           hobby: 'Programming'
         }
-        navigate('/profile',{state: user})
-    }
+        localStorage.setItem('isSignedIn',JSON.stringify(true))
+        navigate('/userprofile',{state: user})
+      }
     else {
-    
       toast.error("Envalid Email or Password");
-      
-
     }
   }
 

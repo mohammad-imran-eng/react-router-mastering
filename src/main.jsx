@@ -11,7 +11,10 @@ import Navbar from './Layout/Navbar';
 
 import './index.css'
 import SignIn from './pages/SignIn';
-import Profile from './pages/Profile';
+import ProductDetails from './components/ProductDetails';
+import UserProfile from './components/UserProfile';
+import UserOrder from './components/UserOrder';
+import ProtectedRoute from './Routes/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -23,24 +26,42 @@ const router = createBrowserRouter([
           element: <About />
         },
         {
+          path: '/userprofile',
+          element: <UserProfile />
+        },
+        {
+          path: '/dashboard',
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: 'user/profile',
+              element: <UserProfile />
+            },
+            {
+              path: 'user/orders',
+              element: <UserOrder />
+            }
+          ]
+        },
+        {
           path: '/',
-          element: <Home />
+          element: <Product />
         },
         {
           path: '/signin',
           element: <SignIn />
         },
         {
-          path: '/profile',
-          element: <Profile />
+          path: '/signout',
+          element: <SignIn />
         },
         {
           path: '/contact',
           element: <Contact />
         },
         {
-          path: '/product',
-          element: <Product />
+          path: '/product/:id',
+          element: <ProductDetails />
         },
         {
           path: '*',
